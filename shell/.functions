@@ -10,8 +10,6 @@ phpv() {
     source ~/.zshrc
 }
 
-alias php70="phpv 7.0"
-alias php71="phpv 7.1"
 alias php72="phpv 7.2"
 alias php73="phpv 7.3"
 alias php74="phpv 7.4"
@@ -93,7 +91,7 @@ function commit() {
 
 xdebug() {
    iniFileLocation="/usr/local/etc/php/7.4/php.ini";
-   
+
    currentLine=`cat $iniFileLocation | grep xdebug.so`
 
    if [[ $currentLine =~ ^#zend_extension ]];
@@ -138,4 +136,8 @@ function scheduler () {
 	echo "Sleeping 60 seconds..."
         sleep 60
     done
+}
+
+composer-link() {
+    composer config repositories.local '{"type": "path", "url": "'$1'"}' --file composer.json
 }

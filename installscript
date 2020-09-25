@@ -30,21 +30,9 @@ ln -s $HOME/.dotfiles/shell/.yarnrc $HOME/.yarnrc
 # Symlink the Mackup config
 ln -s $HOME/.dotfiles/macos/.mackup.cfg $HOME/.mackup.cfg
 
-# Fix missing font characters (see https://github.com/robbyrussell/oh-my-zsh/issues/1906)
-cd ~/.oh-my-zsh/themes/
-git checkout d6a36b1 agnoster.zsh-theme
-
 # Activate z
 cd ~/.dotfiles/shell
 chmod +x z.sh
-
-echo 'Install composer'
-echo '----------------'
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === 'a5c698ffe4b8e849a443b120cd5ba38043260d5c4023dbf93e1558871f1f07f58274fc6f4c93bcfd858c6bd0775cd8d1') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
-mv composer.phar /usr/local/bin/composer
 
 echo 'Install homebrew'
 echo '----------------'
@@ -52,9 +40,17 @@ echo install homebrew
 sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+echo 'Install composer'
+echo '----------------'
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === '795f976fe0ebd8b75f26a6dd68f78fd3453ce79f32ecb33e7fd087d39bfeb978342fb73ac986cd4f54edd0dc902601dc') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+mv composer.phar /usr/local/bin/composer
+
 echo 'Install node'
 echo '-----------'
-brew install node@8
+brew install node@12
 
 echo 'Install pkg-config'
 echo '------------------'
@@ -91,12 +87,10 @@ brew install brew-cask
 
 echo 'Install some nice quicklook plugins'
 echo '-----------------------------------'
-brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package
+brew cask install --force qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webpquicklook suspicious-package
 
 echo 'Install php'
 echo '-----------'
-brew install php@7.0
-brew install php@7.1
 brew install php@7.2
 brew install php@7.4
 
