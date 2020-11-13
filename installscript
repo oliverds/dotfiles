@@ -55,6 +55,12 @@ php composer-setup.php
 rm composer-setup.php
 mv composer.phar /usr/local/bin/composer
 
+echo 'Install homebrew'
+echo '----------------'
+echo install homebrew
+sudo rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 echo 'Install node'
 echo '-----------'
 brew install node@12
