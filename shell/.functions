@@ -14,6 +14,10 @@ alias php72="phpv 7.2"
 alias php73="phpv 7.3"
 alias php74="phpv 7.4"
 
+# Docker
+function ssh-docker() {
+   docker exec -it "$@" bash
+}
 
 # Create a new directory and enter it
 function mkd() {
@@ -74,7 +78,7 @@ function scrapeUrl() {
 }
 
 function rector() {
-   docker run -v $(pwd):/project rector/rector:latest process /project/$1 --config="/project/rector.yaml"  --autoload-file /project/vendor/autoload.php
+   docker run -v $(pwd):/project rector/rector:latest process /project/$1 --set php80 --autoload-file /project/vendor/autoload.php 
 }
 
 #  Commit everything
